@@ -18,9 +18,9 @@ def red(mot,lettre):
     else:
         return False
 
-def yellow(mot,lettre):
+def yellow(mot,lettre,rang):
     compte=0
-    for i in range(6):
+    for i in range(rang):
         if mot[i]==lettre:
             compte+=1
     return compte
@@ -30,7 +30,7 @@ def yellow(mot,lettre):
 #jeu
 
 print(motMystere)
-while end == False:
+while end == False and essais < 8:
     guess=""
     while len(guess)!=6:
         guess = input()
@@ -38,17 +38,20 @@ while end == False:
             print(Fore.WHITE + "Le mot doit faire 6 lettre.")
     good = 0
     for i in range (6):
+        same=yellow(motMystere,guess[i],6)
+        oversame=yellow(guess,guess[i],i)
         if red(motMystere[i],guess[i])==True:
             print(Fore.RED + guess[i], end="")
             good= good+1
-        elif:
-            same=yellow(motMystere,guess[i])
-            if same>0:
-                print(Fore.YELLOW + guess[i], end="")
+        elif same>0 and oversame<same:
+            print(Fore.YELLOW + guess[i], end="")
         else:
             print(Fore.BLUE + guess[i], end="")
-    print(Fore.WHITE + "")
+    print(Fore.WHITE + "(",essais,")")
     essais+=1
     if good ==6:
         end=True
-print(Fore.GREEN + "gg vous avez trouvé en",essais,"éssais")
+if end == True:
+    print(Fore.GREEN + "gg vous avez trouvé en",essais,"éssais")
+else:
+    print(Fore.GREEN + "Perdu... vous avez utilisé vos",essais,"éssais")
