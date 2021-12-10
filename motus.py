@@ -12,6 +12,8 @@ tableau = fichierSource.readlines()
 
 motMystere = tableau[random.randint (0,len(tableau))-1]
 
+#fonction
+
 def red(mot,lettre):
     if lettre==mot:
         return True
@@ -29,7 +31,8 @@ def yellow(mot,lettre,rang):
         
 #jeu
 
-print(motMystere)
+#print(motMystere)
+print("_ _ _ _ _ _")
 while end == False and essais < 8:
     guess=""
     while len(guess)!=6:
@@ -47,8 +50,8 @@ while end == False and essais < 8:
             print(Fore.YELLOW + guess[i], end="")
         else:
             print(Fore.BLUE + guess[i], end="")
-    print(Fore.WHITE + "(",essais,")")
     essais+=1
+    print(Fore.WHITE + "(",essais,")")
     if good ==6:
         end=True
 if end == True:
